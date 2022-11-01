@@ -23,7 +23,7 @@ bool checkStringAllNumber(char s[])
 	return true;
 }
 
-void AlgorithmTimeAndCmpOutput(char algor[], int* &inputArray, int* &tempArray, int size, double &time_out, int &cmp_out)
+void AlgorithmTimeAndCmpOutput(char algor[], int* &inputArray, int* &tempArray, int size, double &time_out, long long &cmp_out)
 {
 	CopyArray(inputArray, tempArray, size);
 	string algorithm(algor);
@@ -35,7 +35,7 @@ void AlgorithmTimeAndCmpOutput(char algor[], int* &inputArray, int* &tempArray, 
 		CopyArray(tempArray, inputArray, size);
 		cmp_out = 0;
 		start = std::chrono::high_resolution_clock::now();
-		InsertionSort(inputArray, size, cmp_out);
+		InsertionSort(inputArray, 0, size-1, cmp_out);
 		end = std::chrono::high_resolution_clock::now();
 
 		//Create a new time_span object, put the time counted to algorithmTimeCount array
@@ -200,7 +200,7 @@ void AlgorithmMode(int argc, char **argv)
 	int* inputArray;
 
 	//Initialize comparison and time counter
-	int algorithmCmpCount;
+	long long algorithmCmpCount;
 	//Initialize an array to store time count of each algorithm
 	double algorithmTimeCounter = 0;
 
@@ -254,7 +254,7 @@ void AlgorithmMode(int argc, char **argv)
 			}
 			if (outputArgument.compare("-comp") == 0 || outputArgument.compare("-both") == 0)
 			{
-				cout << "Comparisons: " << algorithmCmpCount << " | " << algorithmCmpCount << endl;
+				cout << "Comparisons: " << algorithmCmpCount << endl;
 			}
 			else
 			{
@@ -310,7 +310,7 @@ void AlgorithmMode(int argc, char **argv)
 				}
 				if (outputArgument.compare("-comp") == 0 || outputArgument.compare("-both") == 0)
 				{
-					cout << "Comparisons: " << algorithmCmpCount << " | " << algorithmCmpCount << endl;
+					cout << "Comparisons: " << algorithmCmpCount << endl;
 				}
 				else
 				{
@@ -483,7 +483,7 @@ void ComparisonMode(int argc, char **argv)
 	}
 	
 	//Initialize comparison and time counter
-	int algorithmCmpCounter[2];
+	long long algorithmCmpCounter[2];
 
 
 	//Initialize an array to store time count of each algorithm

@@ -21,13 +21,12 @@ void CopyArray(int* &source, int* &des, int n)
 
 void Heapify(int* &a, int n, int i, int &count_cmp)
 {
-		//Heapify elements in subtree a[i]
+	//Heapify elements in subtree a[i]
 	int largest = i;
-	while (++count_cmp && i < n)
+	while (++count_cmp && 2 * i + 1 < n)
 	{
-		largest = i;
-		if (++count_cmp && a[2 * i + 1] > a[2 * i + 2] && 2 * i + 1 < n)
-			largest = 2 * i + 1;
+		largest = 2 * i + 1;
+		
 		if (++count_cmp && a[2 * i + 2] > a[2 * i + 1] && 2 * i + 2 < n)
 			largest = 2 * i + 2;
 
@@ -42,7 +41,7 @@ void Heapify(int* &a, int n, int i, int &count_cmp)
 		}
 		else
 		{
-			break;
+			return;
 		}
 	}
 }

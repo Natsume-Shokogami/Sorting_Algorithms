@@ -1,13 +1,12 @@
 #pragma once
-#include "stdafx.h"
 #include "Sorting.h"
 
 using namespace std;
 
-template <class type>
-void Swap(type a, type b)
+
+void Swap(int &a, int &b)
 {
-	type t = a;
+	int t = a;
 	a = b;
 	b = t;
 }
@@ -19,7 +18,7 @@ void CopyArray(int* &source, int* &des, int n)
 		des[i] = source[i];
 }
 
-void Heapify(int* &a, int n, int i, int &count_cmp)
+void Heapify(int* &a, int n, int i, long long &count_cmp)
 {
 	//Heapify elements in subtree a[i]
 	int largest = i;
@@ -46,10 +45,10 @@ void Heapify(int* &a, int n, int i, int &count_cmp)
 	}
 }
 
-void HeapSort(int* &a, int n, int &count_cmp)
+void HeapSort(int* &a, int n, long long &count_cmp)
 {
 	//Build a max heap
-	for (int i = (n - 1) / 2; i >= 0; i--)
+	for (int i = n / 2 - 1; i >= 0; i--)
 		Heapify(a, n, i, count_cmp);
 
 	//Swap a[0] (largest element in the max heap and reheapify array a
@@ -60,7 +59,7 @@ void HeapSort(int* &a, int n, int &count_cmp)
 	}
 }
 
-void Merge(int* &a, int* &tempArray, int left, int mid, int right, int &count_cmp)
+void Merge(int* &a, int* &tempArray, int left, int mid, int right, long long &count_cmp)
 {
 	//
 	int LArrayCount = mid - left + 1;
@@ -123,7 +122,7 @@ int Min(int a, int b)
 //->Stack Overflow
 //2/ Temporary array initialized once outside of the merge function -> Only need to free memory once -> Significantly improve
 //execution time
-void MergeSort(int* &a, int left, int right, int &count_cmp)
+void MergeSort(int* &a, int left, int right, long long &count_cmp)
 {
 	if (left >= right)
 		return;//base case
@@ -149,12 +148,9 @@ void MergeSort(int* &a, int left, int right, int &count_cmp)
 
 
 
-
 /* Quick sort reference- Link: https://www.algolist.net/Algorithms/Sorting/Quicksort
 Date: Unknown, likely 2009 - Author: AlgoList - Title: QuickSort*/
-
-
-void QuickSort(int* &a, int left, int right, int &count_cmp)
+void QuickSort(int* &a, int left, int right, long long &count_cmp)
 {
 	int i = left, j = right;
 	//Initiate the pivot at middle of each subarray to avoid the worst case
@@ -206,7 +202,7 @@ int GetMax(int* a, int n)
 }
 
 //Pseudocode learnt from the course's theoretical classes
-void RadixSort(int* &a, int n, int &count_cmp)
+void RadixSort(int* &a, int n, long long &count_cmp)
 {
 	int max = GetMax(a, n), greatestRadix = 0, i, j, k, exp = 1;
 	int count[10];
@@ -258,17 +254,17 @@ void RadixSort(int* &a, int n, int &count_cmp)
 //Link: https://www.geeksforgeeks.org/insertion-sort/
 //Author: N/A ; Last updated: 18 Oct 2022
 //Secondary: Programming Pearls - Jon Louis Bentley - 2000 - Page 116
-void InsertionSort(int* &a, int n, int &count_cmp)
+void InsertionSort(int* &a, int low, int high, long long &count_cmp)
 {
 	count_cmp = 0;
 	//Function to do
 	int i, j, key;
-	for (i = 1; ++count_cmp && i < n; i++)
+	for (i = low + 1; ++count_cmp && i <= high; i++)
 	{
 		key = a[i];
 		j = i - 1;
 		//Move element of a[0...i-1] that higher than key towards one index
-		while (++count_cmp && j >= 0 && a[j] > key)
+		while (++count_cmp && j >= low && a[j] > key)
 		{
 			a[j + 1] = a[j];
 			j--;
@@ -285,7 +281,7 @@ void InsertionSort(int* &a, int n, int &count_cmp)
 /*Second citation: https://codelearn.io/sharing/flash-sort-thuat-toan-sap-xep-than-thanh
 Author: HaiDuc014, Last updated: March 18 2021*/
 //Code copies from the source due to unknown bug in my code
-void FlashSort(int* &a, int n, int &count_cmp)
+void FlashSort(int* &a, int n, long long &count_cmp)
 {
 	int minVal = a[0];
 	int max = 0;
@@ -335,7 +331,7 @@ void FlashSort(int* &a, int n, int &count_cmp)
 		}
 	}
 	delete[] l;
-	InsertionSort(a, n, count_cmp);
+	InsertionSort(a, 0, n - 1, count_cmp);
 
 	//int max = 0, min = a[0];
 	//int i, j, k;
@@ -407,7 +403,7 @@ void FlashSort(int* &a, int n, int &count_cmp)
 	//delete[] bucket;
 }
 
-void SelectionSort(int* &a, int n, int &count_cmp)
+void SelectionSort(int* &a, int n, long long &count_cmp)
 {
 	//Function to do selection sort with comparison counter
 	int maxIndex;
@@ -424,11 +420,11 @@ void SelectionSort(int* &a, int n, int &count_cmp)
 }
 
 //Reference: Done by myself
-void BubbleSort(int* &a, int n, int &count_cmp)
+void BubbleSort(int* &a, int n, long long &count_cmp)
 {
 	//Function  to do bubble sort
-	for (int i = 0; i<n; i++)
-		for (int j = i + 1; j < n; j++)
+	for (int i = 0; ++count_cmp && i<n; i++)
+		for (int j = i + 1; ++count_cmp && j < n; j++)
 		{
 			if (a[j] > a[i])
 				Swap(a[j], a[i]);
@@ -437,12 +433,13 @@ void BubbleSort(int* &a, int n, int &count_cmp)
 
 
 //Title : ShellSort - Author: GeekforGeeks - Last updated: 24 Oct 2022
-void ShellSort(int* &a, int n, int &count_cmp)
+void ShellSort(int* &a, int n, long long &count_cmp)
 {
 	int temp, i, j;
-	//Start with a big gap first, then reduce the gap interval by 1 each time
-	for (int gap = n / 2; ++count_cmp && gap > 0; gap--)
+	//Start with a big gap first, then reduce the gap interval each time
+	for (int gap = n/2; gap > 0; gap /= 2)
 	{
+		
 		//Do an insertion sort starts from position gap with the length of each move equals to the gap
 		for (i = gap; i < n; i++)
 		{
@@ -459,9 +456,9 @@ void ShellSort(int* &a, int n, int &count_cmp)
 }
 
 // Reference link: https://www.stdio.vn/giai-thuat-lap-trinh/bubble-sort-va-shaker-sort-01Si3U
-//Title: Bubble Sort và Shaker Sort - Author: Shiro Nguyen - Last updated: August 18 2020
+//Title: Bubble Sort vÃ  Shaker Sort - Author: Shiro Nguyen - Last updated: August 18 2020
 //Source code not by me
-void ShakerSort(int* &a, int n, int &count_cmp)
+void ShakerSort(int* &a, int n, long long &count_cmp)
 {
 	int Left = 0;
 	int Right = n - 1;
@@ -495,7 +492,7 @@ void ShakerSort(int* &a, int n, int &count_cmp)
 //Second reference: https://github.com/jainaman224/Algo_Ds_Notes/tree/master/Counting_Sort/
 //Title: Counting_Sort
 //Author: somya-kapoor -Last updated:25 May 2019
-void CountingSort(int* &a, int n, int &count_cmp)
+void CountingSort(int* &a, int n, long long &count_cmp)
 {
 	count_cmp = 0;
 	int* Output = new int[n];
@@ -541,6 +538,5 @@ void CountingSort(int* &a, int n, int &count_cmp)
 	delete[] countArray;
 	delete[] Output;
 }
-
 
 

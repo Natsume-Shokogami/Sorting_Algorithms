@@ -21,20 +21,29 @@ void CopyArray(int* &source, int* &des, int n)
 
 void Heapify(int* &a, int n, int i, int &count_cmp)
 {
-	//Heapify elements in subtree a[i]
+		//Heapify elements in subtree a[i]
 	int largest = i;
+	while (++count_cmp && i < n)
+	{
+		largest = i;
+		if (++count_cmp && a[2 * i + 1] > a[2 * i + 2] && 2 * i + 1 < n)
+			largest = 2 * i + 1;
+		if (++count_cmp && a[2 * i + 2] > a[2 * i + 1] && 2 * i + 2 < n)
+			largest = 2 * i + 2;
 
-	if (++count_cmp && a[2 * i + 1] > a[2 * i + 2] && 2 * i + 1 < n)
-		largest = 2 * i + 1;
-	if (++count_cmp && a[2 * i + 2] > a[2 * i + 1] && 2 * i + 2 < n)
-		largest = 2 * i + 2;
-
-	/*a[i] must be more significant (in this case, larger) than its children
-	,a[2*i+1] and a[2*i+2] to be a heap, swapthem if they are in incorrect positions*/
-	//Also continue heapify if a[i] is not the largest
-	if (++count_cmp && a[i] < a[largest]) {
-		Swap(a[i], a[largest]);
-		return Heapify(a, n, largest, count_cmp);
+		/*a[i] must be more significant (in this case, larger) than its children
+		,a[2*i+1] and a[2*i+2] to be a heap, swapthem if they are in incorrect positions*/
+		//Also continue heapify if a[i] is not the largest
+		if (++count_cmp && a[i] < a[largest]) {
+			Swap(a[i], a[largest]);
+			i = largest;
+			/*This funtion use iterative heapify to reduce recursive call (thus reduce recursion level)
+			to prevent stack overflow at high array size (>120000)*/
+		}
+		else
+		{
+			break;
+		}
 	}
 }
 

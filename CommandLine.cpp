@@ -32,7 +32,7 @@ void AlgorithmTimeAndCmpOutput(char algor[], int* &inputArray, int* &tempArray, 
 	std::chrono::duration<double> time_span = end - start;
 	if (algorithm.compare("insertion-sort") == 0)
 	{
-		CopyArray(tempArray, inputArray, size);
+		CopyArray(inputArray, tempArray, size);
 		cmp_out = 0;
 		start = std::chrono::high_resolution_clock::now();
 		InsertionSort(inputArray, 0, size-1, cmp_out);
@@ -48,7 +48,7 @@ void AlgorithmTimeAndCmpOutput(char algor[], int* &inputArray, int* &tempArray, 
 	}
 	else if (algorithm.compare("selection-sort") == 0)
 	{
-		CopyArray(tempArray, inputArray, size);
+		CopyArray(inputArray, tempArray, size);
 		cmp_out = 0;
 		start = std::chrono::high_resolution_clock::now();
 		SelectionSort(inputArray, size, cmp_out);
@@ -62,7 +62,7 @@ void AlgorithmTimeAndCmpOutput(char algor[], int* &inputArray, int* &tempArray, 
 	}
 	else if (algorithm.compare("bubble-sort") == 0)
 	{
-		CopyArray(tempArray, inputArray, size);
+		CopyArray(inputArray, tempArray, size);
 		cmp_out = 0;
 		start = std::chrono::high_resolution_clock::now();
 		BubbleSort(inputArray, size, cmp_out);
@@ -76,7 +76,7 @@ void AlgorithmTimeAndCmpOutput(char algor[], int* &inputArray, int* &tempArray, 
 	}
 	else if (algorithm.compare("heap-sort") == 0)
 	{
-		CopyArray(tempArray, inputArray, size);
+		CopyArray(inputArray, tempArray, size);
 		cmp_out = 0;
 		start = std::chrono::high_resolution_clock::now();
 		HeapSort(inputArray, size, cmp_out);
@@ -90,7 +90,7 @@ void AlgorithmTimeAndCmpOutput(char algor[], int* &inputArray, int* &tempArray, 
 	}
 	else if (algorithm.compare("quick-sort") == 0)
 	{
-		CopyArray(tempArray, inputArray, size);
+		CopyArray(inputArray, tempArray, size);
 		cmp_out = 0;
 		start = std::chrono::high_resolution_clock::now();
 		QuickSort(inputArray, 0, size - 1, cmp_out);
@@ -104,7 +104,7 @@ void AlgorithmTimeAndCmpOutput(char algor[], int* &inputArray, int* &tempArray, 
 	}
 	else if (algorithm.compare("merge-sort") == 0)
 	{
-		CopyArray(tempArray, inputArray, size);
+		CopyArray(inputArray, tempArray, size);
 		cmp_out = 0;
 		start = std::chrono::high_resolution_clock::now();
 		MergeSort(inputArray, 0, size - 1, cmp_out);
@@ -118,7 +118,7 @@ void AlgorithmTimeAndCmpOutput(char algor[], int* &inputArray, int* &tempArray, 
 	}
 	else if (algorithm.compare("shell-sort") == 0)
 	{
-		CopyArray(tempArray, inputArray, size);
+		CopyArray(inputArray, tempArray, size);
 		cmp_out = 0;
 		start = std::chrono::high_resolution_clock::now();
 		ShellSort(inputArray, size, cmp_out);
@@ -132,7 +132,7 @@ void AlgorithmTimeAndCmpOutput(char algor[], int* &inputArray, int* &tempArray, 
 	}
 	else if (algorithm.compare("flash-sort") == 0)
 	{
-		CopyArray(tempArray, inputArray, size);
+		CopyArray(inputArray, tempArray, size);
 		cmp_out = 0;
 		start = std::chrono::high_resolution_clock::now();
 		FlashSort(inputArray, size, cmp_out);
@@ -146,7 +146,7 @@ void AlgorithmTimeAndCmpOutput(char algor[], int* &inputArray, int* &tempArray, 
 	}
 	else if (algorithm.compare("shaker-sort") == 0)
 	{
-		CopyArray(tempArray, inputArray, size);
+		CopyArray(inputArray, tempArray, size);
 		cmp_out = 0;
 		start = std::chrono::high_resolution_clock::now();
 		ShakerSort(inputArray, size, cmp_out);
@@ -160,7 +160,7 @@ void AlgorithmTimeAndCmpOutput(char algor[], int* &inputArray, int* &tempArray, 
 	}
 	else if (algorithm.compare("radix-sort") == 0)
 	{
-		CopyArray(tempArray, inputArray, size);
+		CopyArray(inputArray, tempArray, size);
 		cmp_out = 0;
 		start = std::chrono::high_resolution_clock::now();
 		RadixSort(inputArray, size, cmp_out);
@@ -174,7 +174,7 @@ void AlgorithmTimeAndCmpOutput(char algor[], int* &inputArray, int* &tempArray, 
 	}
 	else if (algorithm.compare("counting-sort") == 0)
 	{
-		CopyArray(tempArray, inputArray, size);
+		CopyArray(inputArray, tempArray, size);
 		cmp_out = 0;
 		start = std::chrono::high_resolution_clock::now();
 		CountingSort(inputArray, size, cmp_out);
@@ -238,6 +238,7 @@ void AlgorithmMode(int argc, char **argv)
 
 			//First part of output for command 4
 			cout << "ALGORITHM MODE: " << endl;
+			cout << "Algorithm: " << argv[2] << endl;
 			cout << "Input file: " << argv[argc - 2] << endl;
 			cout << "Input size: " << size << endl;
 
@@ -269,6 +270,7 @@ void AlgorithmMode(int argc, char **argv)
 			size = atoi(argv[3]);
 			
 			cout << "ALGORITHM MODE: " << endl;
+			cout << "Algorithm: " << argv[2] << endl;
 			cout << "Input size: " << size << endl;
 			inputArray = new int[size];
 			int* tempArray = new int[size];
@@ -334,6 +336,7 @@ void AlgorithmMode(int argc, char **argv)
 
 		//First part of output for command 5
 		cout << "ALGORITHM MODE: " << endl;
+		cout << "Algorithm: " << argv[2]<<endl;
 		cout << "Input size: " << argv[3] << endl;
 		cout << "Input order: ";
 
@@ -430,6 +433,7 @@ void ComparisonMode(int argc, char **argv)
 		inputdata.close();
 		//First part of output for command 4
 		cout << "COMPARISON MODE: " << endl;
+		cout << "Algorithm: " << argv[2] << " | " << argv[3] << endl;
 		cout << "Input file: " << argv[argc - 2] << endl;
 		cout << "Input size: " << size << endl;
 
@@ -444,6 +448,7 @@ void ComparisonMode(int argc, char **argv)
 
 		//First part of output for command 5
 		cout << "COMPARISON MODE: " << endl;
+		cout << "Algorithm: " << argv[2] << " | " << argv[3];
 		cout << "Input size: " << argv[argc - 3] << endl;
 		cout << "Input order: ";
 

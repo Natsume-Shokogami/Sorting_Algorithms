@@ -17,7 +17,8 @@ void CopyArray(int* &source, int* &des, int n)
 	for (int i = 0; i < n; i++)
 		des[i] = source[i];
 }
-
+//Heapsort codes algorithm learnt from theoretical classes, also referenced from this website:
+//https://www.geeksforgeeks.org/heap-sort/ - Author GeeksforGeeks - Last updated: 22, Sep 2022
 void Heapify(int* &a, int n, int i, long long &count_cmp)
 {
 	//Heapify elements in subtree a[i]
@@ -419,7 +420,7 @@ void SelectionSort(int* &a, int n, long long &count_cmp)
 	}
 }
 
-//Reference: Done by myself
+//Reference: Done by myself (actually learnt in a class in high school)
 void BubbleSort(int* &a, int n, long long &count_cmp)
 {
 	//Function  to do bubble sort
